@@ -5,7 +5,6 @@ takes two integer arguments
 page and page_size
 """
 import csv
-import math
 from typing import List, Tuple
 
 
