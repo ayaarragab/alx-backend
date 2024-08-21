@@ -22,7 +22,7 @@ class LIFOCache(BaseCaching):
         """
         self.cache_data[key] = item
         self.stack.append(key)
-        if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             last_key = self.stack.pop(-2)
             del self.cache_data[last_key]
             print(f"DISCARD: {last_key}")
