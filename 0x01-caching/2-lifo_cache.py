@@ -20,6 +20,8 @@ class LIFOCache(BaseCaching):
         """
         to update
         """
+        if key is None or item is None:
+            return
         self.cache_data[key] = item
         self.stack.append(key)
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
