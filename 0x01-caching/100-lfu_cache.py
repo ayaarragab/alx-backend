@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FIFO cache?
+LFU cache?
 """
 
 
@@ -17,7 +17,8 @@ class LFUCache(BaseCaching):
         LRUCache cache class
         """
         super().__init__()
-        self.per_access_store = {}
+        self.freq = {}
+        self.order = []
 
     def put(self, key, item):
         """
@@ -26,15 +27,19 @@ class LFUCache(BaseCaching):
         if key is None or item is None:
             return
 
-        self.cache_data[key] = item
-
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            min_accesses_val = min(self.per_access_store.keys())
-            d_key = self.per_access_store[min_accesses_val]
-            del self.per_access_store[min_accesses_val]
-            del self.cache_data[d_key]
-            self.per_access_store[0] = key
-            print(f"DISCARD: {d_key}")
+        if key in self.cache_data:
+            self.freq[key] += 1
+            self.cache_data[key] = item
+        else:
+            if len(self.cache_data) == self.MAX_ITEMS:
+                d_key = min(self.freq, key=lambda k: (self.freq[k], self.order.index(k)))
+                del self.cache_data[d_key]
+                del self.freq[d_key]
+                del self.order.remove(d_key)
+                print(f"DISCARD: {d_key}")
+            self.freq[key] = 1
+            self.cache_data[key] = item
+            self.order.append(key)
 
     def get(self, key):
         """
@@ -42,8 +47,5 @@ class LFUCache(BaseCaching):
         """
         if not key or key not in self.cache_data.keys():
             return None
-        for k, v in self.per_access_store:
-            if v == key:
-                del self.per_access_store[k]
-                self.per_access_store[k + 1] = v
+        self.freq[key] += 1
         return self.cache_data[key]
