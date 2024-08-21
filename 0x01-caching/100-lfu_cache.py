@@ -36,7 +36,7 @@ class LFUCache(BaseCaching):
                                                       self.order.index(k)))
                 del self.cache_data[d_key]
                 del self.freq[d_key]
-                del self.order.remove(d_key)
+                self.order.remove(d_key)
                 print(f"DISCARD: {d_key}")
             self.freq[key] = 1
             self.cache_data[key] = item
