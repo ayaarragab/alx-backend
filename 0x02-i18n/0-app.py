@@ -13,7 +13,7 @@ def hello() -> str:
     as page title (<title>) and
     “Hello world” as header (<h1>).
     """
-    return render_template('templates/0-index.html')
+    return render_template('0-index.html')
 
 
 if __name__ == "__main__":
