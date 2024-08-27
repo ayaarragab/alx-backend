@@ -19,6 +19,14 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
+@localeselector
+def get_locale() -> str:
+    """to determine the best
+    match with our supported languages.
+    """
+    return request.accept_languages.best_match(Config.LANGUAGES)
+
+
 @app.route('/')
 def hello() -> str:
     """Create a single / route and an
@@ -27,15 +35,7 @@ def hello() -> str:
     as page title (<title>) and
     “Hello world” as header (<h1>).
     """
-    return render_template('0-index.html')
-
-
-@localeselector
-def get_locale() -> str:
-    """to determine the best
-    match with our supported languages.
-    """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return render_template('2-index.html')
 
 
 if __name__ == "__main__":
