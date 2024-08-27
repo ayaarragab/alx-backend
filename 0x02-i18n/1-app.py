@@ -3,16 +3,18 @@
 """
 from flask import Flask, render_template
 from flask_babel import Babel
-app = Flask(__name__)
-babel = Babel(app)
 
 
 class Config:
     LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
+
+app = Flask(__name__)
 app.config.from_object(Config)
-babel.default_locale = 'en'
-babel.default_timezone = 'UTC'
+babel = Babel(app)
+
 
 @app.route('/')
 def hello() -> str:
