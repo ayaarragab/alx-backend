@@ -2,7 +2,7 @@
 """a basic Flask app
 """
 from flask import Flask, render_template, g, request
-from flask_babel import Babel, localeselector
+from flask_babel import Babel
 
 
 class Config:
@@ -19,7 +19,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-@localeselector
+@babel.localeselector
 def get_locale() -> str:
     """to determine the best
     match with our supported languages.
