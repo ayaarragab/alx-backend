@@ -25,6 +25,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 @babel.localeselector
 def get_locale():
     """_summary_
@@ -53,6 +54,7 @@ def hello() -> str:
         title=_("home_title"),
         header=_("home_header"))
 
+
 def get_user() -> int:
     """returns a user dictionary or None if the ID cannot be found
     """
@@ -63,8 +65,11 @@ def get_user() -> int:
 
 
 @app.before_request
-def before_request():
-    g.user = get_user()
+def before_request() -> None:
+    """_summary_
+    """
+    user = get_user()
+    g.user = user
 
 
 if __name__ == "__main__":
