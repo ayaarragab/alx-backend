@@ -33,7 +33,7 @@ users = {
 }
 
 
-def get_user():
+def get_user() -> int:
     """returns a user dictionary or None if the ID cannot be found
     """
     login_id = request.args.get('login_as')
@@ -51,7 +51,7 @@ def before_request() -> None:
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Determine the best match for the user's locale."""
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
@@ -67,7 +67,7 @@ def get_locale():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """_summary_
     """
     return render_template('5-index.html')
