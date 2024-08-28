@@ -24,13 +24,11 @@ def get_locale() -> str:
     """to determine the best
     match with our supported languages.
     """
-    local = None
-    if request.args:
-        local = request.args.get('local')
-    if local and local in Config.LANGUAGES:
-        return local
-    else:
-        return request.accept_languages.best_match(Config.LANGUAGES)
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        print(locale)
+        return locale
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 @app.route('/')
