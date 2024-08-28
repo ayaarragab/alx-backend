@@ -35,7 +35,10 @@ def hello() -> str:
     as page title (<title>) and
     “Hello world” as header (<h1>).
     """
-    return render_template('2-index.html', title=_("home_title"), header=_("home_header"))
+    return render_template(
+        '2-index.html',
+        title=_("home_title"),
+        header=_("home_header"))
 
 
 if __name__ == "__main__":
