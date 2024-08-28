@@ -53,7 +53,7 @@ def hello() -> str:
         title=_("home_title"),
         header=_("home_header"))
 
-def get_user():
+def get_user() -> int:
     """returns a user dictionary or None if the ID cannot be found
     """
     login_id = request.args.get('login_as')
