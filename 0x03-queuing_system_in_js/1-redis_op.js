@@ -13,9 +13,10 @@ const setNewSchool = async (schoolName, value) => {
 }
 
 const displaySchoolValue = async (schoolName) => {
-    await client.get(schoolName);
+    const val = await client.get(schoolName);
+    return val;
 }
 
-console.log(displaySchoolValue('Holberton'));
-console.log(setNewSchool('HolbertonSanFrancisco', '100'));
-console.log(displaySchoolValue('HolbertonSanFrancisco'));
+console.log(await displaySchoolValue('Holberton'));
+await setNewSchool('HolbertonSanFrancisco', '100')
+console.log(await displaySchoolValue('HolbertonSanFrancisco'));
